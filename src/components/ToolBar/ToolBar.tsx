@@ -15,7 +15,7 @@ const ToolBar = observer(() => {
         <ToolButton
           key={tool.id}
           $active={toolStore.selectedTool === tool.id}
-          onClick={() => toolStore.setTool(tool.id)}
+          onClick={() => toolStore.setSelectedTool(tool.id)}
         >
           {tool.label}
         </ToolButton>
