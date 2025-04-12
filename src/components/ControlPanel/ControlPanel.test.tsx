@@ -5,20 +5,20 @@ import { describe, it, expect } from "vitest";
 
 describe("ControlPanel", () => {
   it("does not render when no tool is selected", () => {
-    toolStore.setTool(null);
+    toolStore.setSelectedTool(null);
     const { queryByTestId } = render(<ControlPanel />);
     expect(queryByTestId("control-panel")).toBeNull();
   });
 
   it("renders shape controls when 'shape' tool is selected", () => {
-    toolStore.setTool("shape");
+    toolStore.setSelectedTool("shape");
     render(<ControlPanel />);
     expect(screen.getByText(/Shape Color/i)).toBeInTheDocument();
     expect(screen.getByText(/Shape Type/i)).toBeInTheDocument();
   });
 
   it("renders fill controls when 'fill' tool is selected", () => {
-    toolStore.setTool("fill");
+    toolStore.setSelectedTool("fill");
     render(<ControlPanel />);
     expect(screen.getByText(/Background Fill Color/i)).toBeInTheDocument();
   });

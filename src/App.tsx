@@ -2,6 +2,7 @@ import styled from "styled-components";
 import "./App.css";
 import ToolBar from "./components/ToolBar/ToolBar";
 import ControlPanel from "./components/ControlPanel/ControlPanel";
+import DrawingArea from "./components/DrawingArea/DrawingArea";
 
 function App() {
   return (
@@ -9,7 +10,9 @@ function App() {
       <ToolBar />
       <Body>
         <ControlPanel />
-        <CanvasPlaceholder>{/* Future DrawingArea */}</CanvasPlaceholder>
+        <CanvasPlaceholder>
+          <DrawingArea />
+        </CanvasPlaceholder>
       </Body>
     </Layout>
   );
