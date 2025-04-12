@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import styled from "styled-components";
-import toolStore from "../../stores/ToolStore";
+import toolStore, { Shape } from "../../stores/ToolStore";
 
 const PanelWrapper = styled.div`
   width: 220px;
@@ -14,7 +14,7 @@ const ControlGroup = styled.div`
 `;
 
 const ControlPanel = observer(() => {
-  const { selectedTool } = toolStore;
+  const { selectedTool, toolOptions } = toolStore;
 
   if (!selectedTool) return null;
 
@@ -25,13 +25,22 @@ const ControlPanel = observer(() => {
           <ControlGroup>
             <label>
               Shape Color:
-              <input type="color" defaultValue="#ff0000" />
+              <input
+                type="color"
+                value={toolOptions.shape.color}
+                onChange={(e) => toolStore.setShapeColor(e.target.value)}
+              />
             </label>
           </ControlGroup>
           <ControlGroup>
             <label>
               Shape Type:
-              <select defaultValue="rect">
+              <select
+                value={toolOptions.shape.type}
+                onChange={(e) =>
+                  toolStore.setShapeType(e.target.value as Shape)
+                }
+              >
                 <option value="rect">Rectangle</option>
                 <option value="circle">Circle</option>
               </select>
@@ -44,7 +53,11 @@ const ControlPanel = observer(() => {
         <ControlGroup>
           <label>
             Background Fill Color:
-            <input type="color" defaultValue="#ffffff" />
+            <input
+              type="color"
+              value={toolOptions.fill.color}
+              onChange={(e) => toolStore.setFillColor(e.target.value)}
+            />
           </label>
         </ControlGroup>
       )}

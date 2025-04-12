@@ -10,17 +10,55 @@
 // src/stores/ToolStore.ts
 import { makeAutoObservable } from "mobx";
 
-export type ToolType = "shape" | "fill" | null;
+export type ToolID = "shape" | "fill" | null;
+
+export type Shape = "rectangle" | "circle";
+
+type ShapeToolOptions = {
+  type: Shape;
+  color: string;
+};
+
+type FillToolOptions = {
+  color: string;
+};
+
+type ToolOptions = {
+  shape: ShapeToolOptions;
+  fill: FillToolOptions;
+};
 
 export class ToolStore {
-  selectedTool: ToolType = null;
+  selectedTool: ToolID | null = null;
+
+  toolOptions: ToolOptions = {
+    shape: {
+      type: "rectangle",
+      color: "#ffffff",
+    },
+    fill: {
+      color: "#FFFFFF",
+    },
+  };
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setTool(tool: ToolType) {
+  setSelectedTool(tool: ToolID | null) {
     this.selectedTool = tool;
+  }
+
+  setShapeType(type: ShapeToolOptions["type"]) {
+    this.toolOptions.shape.type = type;
+  }
+
+  setShapeColor(color: string) {
+    this.toolOptions.shape.color = color;
+  }
+
+  setFillColor(color: string) {
+    this.toolOptions.fill.color = color;
   }
 
   clearTool() {
