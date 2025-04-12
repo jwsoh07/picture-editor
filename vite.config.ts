@@ -7,5 +7,6 @@ export default defineConfig({
   test: {
     environment: "jsdom", // 👈 this is the fix
     globals: true, // (optional) allows using `describe`, `it`, etc without imports
+    setupFiles: "./src/setupTests.ts",
   },
 });
