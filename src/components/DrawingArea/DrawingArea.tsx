@@ -11,7 +11,7 @@ import { handleFillTool } from "../../toolHandlers/fillTool";
 
 const CanvasWrapper = styled.div`
   flex-grow: 1;
-  background-color: #fff;
+  background-color: #f2f2f2;
 `;
 
 const DrawingArea = observer(() => {
@@ -26,7 +26,7 @@ const DrawingArea = observer(() => {
     const fabricCanvas = new Canvas(canvasElRef.current, {
       width: 800,
       height: 600,
-      backgroundColor: "#ffffff",
+      backgroundColor: "#d1d1d1",
     });
 
     canvasRef.current = fabricCanvas;
