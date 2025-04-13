@@ -1,8 +1,13 @@
 import { useEffect, useRef } from "react";
-import { Rect, Canvas, Circle, TPointerEvent } from "fabric";
+import { Canvas, TPointerEvent } from "fabric";
+
 import styled from "styled-components";
 import { observer } from "mobx-react-lite";
+
 import toolStore from "../../stores/ToolStore";
+
+import { handleShapeTool } from "../../toolHandlers/shapeTool";
+import { handleFillTool } from "../../toolHandlers/fillTool";
 
 const CanvasWrapper = styled.div`
   flex-grow: 1;
@@ -41,37 +46,15 @@ const DrawingArea = observer(() => {
       const pointer = canvas.getPointer(opt.e);
       const { selectedTool, toolOptions } = toolStore;
 
-      if (selectedTool === "shape") {
-        const { color, type } = toolOptions.shape;
-
-        let shape;
-        if (type === "rectangle") {
-          shape = new Rect({
-            left: pointer.x,
-            top: pointer.y,
-            width: 100,
-            height: 60,
-            fill: color,
-          });
-        } else if (type === "circle") {
-          shape = new Circle({
-            left: pointer.x,
-            top: pointer.y,
-            radius: 40,
-            fill: color,
-          });
-        }
-
-        if (shape) {
-          canvas.add(shape);
-          canvas.renderAll();
-        }
-      }
-
-      if (selectedTool === "fill") {
-        const { color } = toolOptions.fill;
-        canvas.backgroundColor = color;
-        canvas.renderAll();
+      switch (selectedTool) {
+        case "shape":
+          handleShapeTool(canvas, pointer, toolOptions.shape);
+          break;
+        case "fill":
+          handleFillTool(canvas, toolOptions.fill);
+          break;
+        default:
+          break;
       }
     };
 
