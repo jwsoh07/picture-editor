@@ -1,5 +1,5 @@
-import { Canvas, Point, Rect, Object, Circle } from "fabric";
-import { ToolOptions } from "../stores/ToolStore";
+import { Canvas, Point, Rect, Circle } from "fabric";
+import { ToolOptions } from "../types";
 import { layerStore } from "../stores/LayerStore";
 
 export function handleShapeTool(
@@ -8,7 +8,7 @@ export function handleShapeTool(
   options: ToolOptions["shape"]
 ) {
   const { color, type } = options;
-  let shape: Object | null = null;
+  let shape: Rect | Circle | null = null;
 
   if (type === "rectangle") {
     shape = new Rect({

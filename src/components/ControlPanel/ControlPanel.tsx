@@ -1,10 +1,11 @@
 import { observer } from "mobx-react-lite";
 import styled from "styled-components";
-import { IoIosClose } from "react-icons/io";
+import { Cross1Icon } from "@radix-ui/react-icons";
 import toolStore from "../../stores/ToolStore";
 import { ColorPicker } from "./ColorPicker";
 import { capitalizeWords } from "../../utility/capitalizeWords";
 import { ShapePicker } from "./ShapePicker";
+
 const PanelWrapper = styled.div`
   width: 275px;
   padding: 1rem;
@@ -44,7 +45,7 @@ const ControlPanel = observer(() => {
           <Head>
             <Title>{capitalizeWords(selectedTool + " Tool Options")}</Title>
             <CloseButton onClick={() => toolStore.setSelectedTool(null)}>
-              <IoIosClose size="2em" />
+              <Cross1Icon />
             </CloseButton>
           </Head>
           <ControlGroup>
