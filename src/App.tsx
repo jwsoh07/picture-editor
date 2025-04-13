@@ -3,6 +3,7 @@ import "./App.css";
 import ToolBar from "./components/ToolBar/ToolBar";
 import ControlPanel from "./components/ControlPanel/ControlPanel";
 import DrawingArea from "./components/DrawingArea/DrawingArea";
+import { Layers } from "./components/Layers/Layers";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <CanvasPlaceholder>
           <DrawingArea />
         </CanvasPlaceholder>
+        <Layers />
       </Body>
     </Layout>
   );
