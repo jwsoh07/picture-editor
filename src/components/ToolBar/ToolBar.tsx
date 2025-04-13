@@ -42,6 +42,7 @@ const ToolbarWrapper = styled.div`
   padding: 4px 6px;
   background-color: #fefefe;
   gap: 2px;
+  height: var(--toolbar-height);
 `;
 
 const ToolButton = styled.button<{ $active: boolean }>`
