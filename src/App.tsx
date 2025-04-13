@@ -8,12 +8,12 @@ import { Layers } from "./components/Layers/Layers";
 function App() {
   return (
     <Layout>
-      <ToolBar />
       <Body>
         <ControlPanel />
-        <CanvasPlaceholder>
+        <Main>
+          <ToolBar />
           <DrawingArea />
-        </CanvasPlaceholder>
+        </Main>
         <Layers />
       </Body>
     </Layout>
@@ -31,7 +31,9 @@ const Body = styled.div`
   flex: 1;
 `;
 
-const CanvasPlaceholder = styled.div`
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
   background: #eee;
 `;

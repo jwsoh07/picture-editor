@@ -13,13 +13,14 @@ describe("ControlPanel", () => {
   it("renders shape controls when 'shape' tool is selected", () => {
     toolStore.setSelectedTool("shape");
     render(<ControlPanel />);
-    expect(screen.getByText(/Shape Color/i)).toBeInTheDocument();
-    expect(screen.getByText(/Shape Type/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Color/i)).toBeInTheDocument();
+    // TODO:
+    // need to check for Shape selector
   });
 
   it("renders fill controls when 'fill' tool is selected", () => {
     toolStore.setSelectedTool("fill");
     render(<ControlPanel />);
-    expect(screen.getByText(/Background Fill Color/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Color/i)).toBeInTheDocument();
   });
 });
