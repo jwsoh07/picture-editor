@@ -1,16 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { nanoid } from "nanoid";
-import { ToolID, ShapeToolOptions, FillToolOptions } from "./ToolStore";
-
-type Layer = {
-  id: string;
-  type: LayerType;
-  tool: ToolID;
-  options: ShapeToolOptions | FillToolOptions;
-  timestamp: number;
-};
-
-export type LayerType = "shape" | "background";
+import { Layer } from "../types";
 
 class LayerStore {
   layers: Layer[] = [];
@@ -37,4 +27,3 @@ class LayerStore {
 }
 
 export const layerStore = new LayerStore();
-export type { Layer };
