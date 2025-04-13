@@ -1,58 +1,44 @@
-import styled from "styled-components";
-import { PiShapesLight } from "react-icons/pi";
-import { IoColorFillOutline } from "react-icons/io5";
+import { Toolbar } from "radix-ui";
+import { BlendingModeIcon, MixIcon } from "@radix-ui/react-icons";
+
+import styles from "./ToolBar.module.css";
 import { observer } from "mobx-react-lite";
 
 import toolStore from "../../stores/ToolStore";
-import { ICON_SIZE } from "../../constants";
 
 const ToolBar = observer(() => {
   const tools = [
     {
       id: "shape",
       label: "Shape tool",
-      icon: <PiShapesLight size={ICON_SIZE} />,
+      icon: <MixIcon />,
     },
     {
       id: "fill",
       label: "Fill tool",
-      icon: <IoColorFillOutline size={ICON_SIZE} />,
+      icon: <BlendingModeIcon />,
     },
   ] as const;
-
   return (
-    <ToolbarWrapper>
-      {tools.map((tool) => (
-        <ToolButton
-          key={tool.id}
-          $active={toolStore.selectedTool === tool.id}
-          onClick={() => toolStore.setSelectedTool(tool.id)}
-          aria-label={tool.label}
-        >
-          {tool.icon}
-        </ToolButton>
-      ))}
-    </ToolbarWrapper>
+    <Toolbar.Root className={styles.Root} aria-label="Picture editing tools">
+      {tools.map((tool) => {
+        return (
+          <Toolbar.Button
+            className={styles.Button}
+            value={tool.id}
+            aria-label={tool.label}
+            onClick={() => toolStore.setSelectedTool(tool.id)}
+          >
+            {tool.icon}
+          </Toolbar.Button>
+        );
+      })}
+
+      <Toolbar.Separator className={styles.Separator} />
+
+      {/* For Undo, Redo, etc.. */}
+    </Toolbar.Root>
   );
 });
-
-const ToolbarWrapper = styled.div`
-  display: flex;
-  justify-content: start;
-  padding: 4px 6px;
-  background-color: #fefefe;
-  gap: 2px;
-  height: var(--toolbar-height);
-`;
-
-const ToolButton = styled.button<{ $active: boolean }>`
-  background-color: ${(props) =>
-    props.$active ? "rgb(242, 242, 242)" : "transparent"};
-  border: none;
-  color: #333;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
-`;
 
 export default ToolBar;
