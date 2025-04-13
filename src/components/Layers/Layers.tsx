@@ -1,15 +1,12 @@
 import { observer } from "mobx-react-lite";
-import { PiShapesLight } from "react-icons/pi";
-import { IoColorFillOutline } from "react-icons/io5";
+import { BlendingModeIcon, MixIcon } from "@radix-ui/react-icons";
 
 import styled from "styled-components";
 import { layerStore } from "../../stores/LayerStore";
 
-const ICON_SIZE = "1.25rem";
-
 const ListItemIconMap = {
-  shape: <PiShapesLight size={ICON_SIZE} />,
-  fill: <IoColorFillOutline size={ICON_SIZE} />,
+  shape: <MixIcon />,
+  fill: <BlendingModeIcon />,
 };
 
 const Wrapper = styled.div`

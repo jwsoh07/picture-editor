@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { FaRegSquare, FaRegCircle } from "react-icons/fa";
 import { observer } from "mobx-react-lite";
 import toolStore from "../../stores/ToolStore";
 import { Shape } from "../../types";
+import { SquareIcon, CircleIcon } from "@radix-ui/react-icons";
 
 const shapeIcons: Record<Shape, React.ReactNode> = {
-  rectangle: <FaRegSquare />,
-  circle: <FaRegCircle />,
+  rectangle: <SquareIcon />,
+  circle: <CircleIcon />,
 };
 
 export const ShapePicker = observer(() => {
