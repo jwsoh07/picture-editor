@@ -14,16 +14,16 @@ export type ToolID = "shape" | "fill" | null;
 
 export type Shape = "rectangle" | "circle";
 
-type ShapeToolOptions = {
+export type ShapeToolOptions = {
   type: Shape;
   color: string;
 };
 
-type FillToolOptions = {
+export type FillToolOptions = {
   color: string;
 };
 
-type ToolOptions = {
+export type ToolOptions = {
   shape: ShapeToolOptions;
   fill: FillToolOptions;
 };
