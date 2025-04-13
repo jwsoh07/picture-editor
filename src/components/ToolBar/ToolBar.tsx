@@ -40,16 +40,17 @@ const ToolbarWrapper = styled.div`
   display: flex;
   justify-content: start;
   padding: 4px 6px;
-  background-color: #fcfcfc;
+  background-color: #fefefe;
   gap: 2px;
 `;
 
 const ToolButton = styled.button<{ $active: boolean }>`
-  background-color: transparent;
+  background-color: ${(props) =>
+    props.$active ? "rgb(242, 242, 242)" : "transparent"};
   border: none;
-  color: ${(props) => (props.$active ? "rgb(255, 0, 0)" : "#333")};
-  padding: 4px 8px;
-  border-radius: 4px;
+  color: #333;
+  padding: 8px;
+  border-radius: 8px;
   cursor: pointer;
 `;
 
