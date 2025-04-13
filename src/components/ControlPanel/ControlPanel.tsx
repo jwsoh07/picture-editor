@@ -1,16 +1,35 @@
 import { observer } from "mobx-react-lite";
 import styled from "styled-components";
-import toolStore, { Shape } from "../../stores/ToolStore";
-
+import { IoIosClose } from "react-icons/io";
+import toolStore from "../../stores/ToolStore";
+import { ColorPicker } from "./ColorPicker";
+import { capitalizeWords } from "../../utility/capitalizeWords";
+import { ShapePicker } from "./ShapePicker";
 const PanelWrapper = styled.div`
-  width: 220px;
+  width: 275px;
   padding: 1rem;
-  border-right: 1px solid #ddd;
-  background-color: #fafafa;
+  border-right: 0.5px solid #f3f3f3;
+  background-color: #fefefe;
 `;
 
 const ControlGroup = styled.div`
   margin-bottom: 1rem;
+`;
+
+const Head = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Title = styled.h2`
+  font-size: 1.25rem;
+`;
+
+const CloseButton = styled.button`
+  padding: 0;
+  border: 0;
+  background-color: transparent;
 `;
 
 const ControlPanel = observer(() => {
@@ -20,46 +39,35 @@ const ControlPanel = observer(() => {
 
   return (
     <PanelWrapper data-testid="control-panel">
-      {selectedTool === "shape" && (
+      {selectedTool && (
         <>
+          <Head>
+            <Title>{capitalizeWords(selectedTool + " Tool Options")}</Title>
+            <CloseButton onClick={() => toolStore.setSelectedTool(null)}>
+              <IoIosClose size="2em" />
+            </CloseButton>
+          </Head>
           <ControlGroup>
-            <label>
-              Shape Color:
-              <input
-                type="color"
-                value={toolOptions.shape.color}
-                onChange={(e) => toolStore.setShapeColor(e.target.value)}
+            {selectedTool === "shape" && (
+              <>
+                <ColorPicker
+                  label="Color"
+                  color={toolStore.toolOptions.shape.color}
+                  onChange={(newColor) => toolStore.setShapeColor(newColor)}
+                />
+                <ShapePicker />
+              </>
+            )}
+
+            {selectedTool === "fill" && (
+              <ColorPicker
+                label="Color"
+                color={toolOptions.fill.color}
+                onChange={(newColor) => toolStore.setFillColor(newColor)}
               />
-            </label>
-          </ControlGroup>
-          <ControlGroup>
-            <label>
-              Shape Type:
-              <select
-                value={toolOptions.shape.type}
-                onChange={(e) =>
-                  toolStore.setShapeType(e.target.value as Shape)
-                }
-              >
-                <option value="rect">Rectangle</option>
-                <option value="circle">Circle</option>
-              </select>
-            </label>
+            )}
           </ControlGroup>
         </>
-      )}
-
-      {selectedTool === "fill" && (
-        <ControlGroup>
-          <label>
-            Background Fill Color:
-            <input
-              type="color"
-              value={toolOptions.fill.color}
-              onChange={(e) => toolStore.setFillColor(e.target.value)}
-            />
-          </label>
-        </ControlGroup>
       )}
     </PanelWrapper>
   );
