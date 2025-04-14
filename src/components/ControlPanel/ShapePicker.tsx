@@ -19,7 +19,7 @@ const shapeIcons: Record<Shape, React.ReactNode> = {
   circle: <HugeiconsIcon icon={CircleIcon} />,
 };
 
-export const ShapePicker = observer(() => {
+const ShapePicker = observer(() => {
   const selectedShape = toolStore.toolOptions.shape.type;
 
   return (
@@ -72,3 +72,5 @@ const ShapeButton = styled.button<{ $selected: boolean }>`
     height: 20px;
   }
 `;
+
+export default ShapePicker;
