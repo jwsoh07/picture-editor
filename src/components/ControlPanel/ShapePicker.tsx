@@ -59,12 +59,15 @@ const ShapeButton = styled.button<{ $selected: boolean }>`
   all: unset;
   cursor: pointer;
   border-radius: 6px;
-  color: ${({ $selected }) => ($selected ? "#0284c7" : "#666")};
+  color: ${({ $selected }) => ($selected ? "var(--violet-11)" : "#666")};
+  background-color: ${({ $selected }) =>
+    $selected ? "var(--violet-3)" : "transparent"};
   transition: all 0.2s ease;
+  padding: 2px;
 
   &:hover {
-    background-color: #f0f9ff;
-    color: #0284c7;
+    background-color: var(--violet-3);
+    color: var(--violet-11);
   }
 
   svg {
