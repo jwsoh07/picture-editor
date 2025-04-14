@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export type ToolID = "shape" | "fill";
+export type ToolID = "shape" | "fill" | "pencil" | "brush";
 
 export type Shape = "rectangle" | "circle" | "hexagon" | "triangle";
 
@@ -16,6 +16,11 @@ export type ShapeToolOptions = {
   color: string;
 };
 
+export type PencilToolOptions = {
+  color: string;
+  width: number;
+};
+
 export type FillToolOptions = {
   color: string;
 };
@@ -23,4 +28,5 @@ export type FillToolOptions = {
 export type ToolOptions = {
   shape: ShapeToolOptions;
   fill: FillToolOptions;
+  pencil: PencilToolOptions;
 };

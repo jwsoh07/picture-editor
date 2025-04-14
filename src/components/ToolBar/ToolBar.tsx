@@ -5,6 +5,8 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import {
   PaintBucketIcon,
   ShapeCollectionIcon,
+  BrushIcon,
+  PencilEdit01Icon,
 } from "@hugeicons/core-free-icons";
 
 import styles from "./ToolBar.module.css";
@@ -14,6 +16,7 @@ import ShapePicker from "../ControlPanel/ShapePicker";
 import ColorPicker from "../ControlPanel/ColorPicker";
 import ToolIcon from "./ToolIcon";
 import { ToolAttributes } from "../../types";
+import Seperator from "../Seperator";
 
 const ToolBar = observer(() => {
   /* This is where we would begin adding a new tool to the toolbar.
@@ -34,12 +37,41 @@ const ToolBar = observer(() => {
    */
   const tools: ToolAttributes[] = [
     {
+      id: "pencil",
+      label: "Pencil tool",
+      icon: (
+        <HugeiconsIcon
+          icon={PencilEdit01Icon}
+          size={20}
+          onClick={() => {
+            toolStore.setSelectedTool("pencil");
+          }}
+        />
+      ),
+      displaySettings: <></>,
+    },
+    {
+      id: "brush",
+      label: "Brush tool",
+      icon: (
+        <HugeiconsIcon
+          icon={BrushIcon}
+          size={20}
+          onClick={() => {
+            toolStore.setSelectedTool("brush");
+          }}
+        />
+      ),
+      displaySettings: <></>,
+    },
+    {
       id: "shape",
       label: "Shape tool",
       icon: <HugeiconsIcon icon={ShapeCollectionIcon} size={20} />,
       displaySettings: (
         <>
           <ShapePicker />
+          <Seperator />
           <ColorPicker
             label="Color"
             color={toolStore.toolOptions.shape.color}

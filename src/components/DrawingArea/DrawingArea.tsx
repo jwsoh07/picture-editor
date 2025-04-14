@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Canvas, TPointerEvent } from "fabric";
+import { Canvas, CircleBrush, PencilBrush, TPointerEvent } from "fabric";
 
 import styled from "styled-components";
 import { observer } from "mobx-react-lite";
@@ -17,6 +17,8 @@ const CanvasWrapper = styled.div`
 const DrawingArea = observer(() => {
   const canvasRef = useRef<Canvas | null>(null);
   const canvasElRef = useRef<HTMLCanvasElement>(null);
+
+  const { selectedTool } = toolStore;
 
   // Giving the <canvas> element super powers by transforming
   // it to a fabric canvas.
@@ -86,6 +88,27 @@ const DrawingArea = observer(() => {
       canvas.off("mouse:down", handleMouseDown);
     };
   }, []);
+
+  // Set up drawing mode when user selects pencil tool
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    if (selectedTool === "pencil") {
+      canvas.isDrawingMode = true;
+      canvas.freeDrawingBrush = new PencilBrush(canvas);
+      canvas.freeDrawingBrush.color = "#000000";
+      canvas.freeDrawingBrush.width = 2;
+    } else if (selectedTool === "brush") {
+      canvas.isDrawingMode = true;
+      canvas.freeDrawingBrush = new CircleBrush(canvas);
+      canvas.freeDrawingBrush.color = "#ff0000";
+      canvas.freeDrawingBrush.width = 10;
+    } else {
+      console.log("no drawing anymore");
+      canvas.isDrawingMode = false;
+    }
+  }, [selectedTool]);
 
   return (
     <CanvasWrapper>
