@@ -962,4 +962,8 @@ h6 {
   --yellow-surface: #fefbe4cc;
   --yellow-indicator: var(--yellow-10);
   --yellow-track: var(--yellow-10);
+
+  --toolbar-height: 40px;
+
+  font-family: "Arial";
 }
