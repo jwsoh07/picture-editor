@@ -10,11 +10,15 @@ const LayerTypeIcons = {
   fill: <BlendingModeIcon />,
 };
 
-export const Layers = observer(() => {
+const Layers = observer(() => {
   if (layerStore.layers.length === 0) return null;
 
   return (
-    <ScrollArea.Root className={styles.Root} style={{ position: "absolute" }}>
+    <ScrollArea.Root
+      className={styles.Root}
+      style={{ position: "absolute" }}
+      data-testid="layers-panel"
+    >
       <ScrollArea.Viewport className={styles.Viewport}>
         <div style={{ padding: "15px 20px" }}>
           <div className={styles.Text}>Layers</div>
@@ -40,3 +44,5 @@ export const Layers = observer(() => {
     </ScrollArea.Root>
   );
 });
+
+export default Layers;

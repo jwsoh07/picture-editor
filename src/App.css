@@ -1,5 +1,7 @@
-#root {
-  --toolbar-height: 44px;
-
-  font-family: "Arial";
+.drawing-app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--gray-7);
 }

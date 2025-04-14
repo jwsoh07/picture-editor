@@ -7,7 +7,7 @@ type ColorPickerProps = {
   onChange: (color: string) => void;
 };
 
-export const ColorPicker: React.FC<ColorPickerProps> = ({
+const ColorPicker: React.FC<ColorPickerProps> = ({
   label = "Color",
   color,
   onChange,
@@ -66,3 +66,5 @@ const ColorInput = styled.input`
   opacity: 0;
   cursor: pointer;
 `;
+
+export default ColorPicker;

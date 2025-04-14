@@ -1,21 +1,38 @@
 import { observer } from "mobx-react-lite";
 import toolStore from "../../stores/ToolStore";
 
-import { Toolbar, Tooltip, Popover } from "radix-ui";
-
-import styles from "./ToolBar.module.css";
-
-import { ShapePicker } from "../ControlPanel/ShapePicker";
-import { capitalizeWords } from "../../utility/capitalizeWords";
-import { ColorPicker } from "../ControlPanel/ColorPicker";
+import { HugeiconsIcon } from "@hugeicons/react";
 import {
   PaintBucketIcon,
   ShapeCollectionIcon,
 } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+
+import styles from "./ToolBar.module.css";
+import { Toolbar } from "radix-ui";
+
+import ShapePicker from "../ControlPanel/ShapePicker";
+import ColorPicker from "../ControlPanel/ColorPicker";
+import ToolIcon from "./ToolIcon";
+import { ToolAttributes } from "../../types";
 
 const ToolBar = observer(() => {
-  const tools = [
+  /* This is where we would begin adding a new tool to the toolbar.
+   * The 4 necessary attributes for each tool are shown below in each
+   * tool object.
+   *
+   * id - This would differentiate what will happen when the user interacts
+   * with <DrawingArea />. e.g. id: shape would create and place shapes on
+   * the canvas.
+   *
+   * label - This is used for labelling the tool that is either visible to
+   * sighted users or screen readers.
+   *
+   * icon - Icon that shows up on ToolBar
+   *
+   * displaySettings - The input settings we would like the user to be able
+   * to configure before applying the tool on the DrawingArea.
+   */
+  const tools: ToolAttributes[] = [
     {
       id: "shape",
       label: "Shape tool",
@@ -48,47 +65,7 @@ const ToolBar = observer(() => {
   return (
     <Toolbar.Root className={styles.Root} aria-label="Picture editing tools">
       {tools.map((tool) => {
-        return (
-          <Tooltip.Provider delayDuration={500}>
-            <Tooltip.Root>
-              <Tooltip.Trigger asChild>
-                <Popover.Root>
-                  <Popover.Trigger asChild>
-                    <Toolbar.Button
-                      className={styles.IconButton}
-                      value={tool.id}
-                      aria-label={tool.label}
-                      onClick={() => toolStore.setSelectedTool(tool.id)}
-                    >
-                      {tool.icon}
-                    </Toolbar.Button>
-                  </Popover.Trigger>
-                  <Popover.Portal>
-                    <Popover.Content className={styles.Content} sideOffset={5}>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 10,
-                        }}
-                      >
-                        {tool.displaySettings}
-                      </div>
-
-                      <Popover.Arrow className={styles.Arrow} />
-                    </Popover.Content>
-                  </Popover.Portal>
-                </Popover.Root>
-              </Tooltip.Trigger>
-              <Tooltip.Portal>
-                <Tooltip.Content className={styles.ToolTipContent}>
-                  {capitalizeWords(tool.id)}
-                  <Tooltip.Arrow className={styles.Arrow} />
-                </Tooltip.Content>
-              </Tooltip.Portal>
-            </Tooltip.Root>
-          </Tooltip.Provider>
-        );
+        return <ToolIcon tool={tool} key={tool.id} />;
       })}
       <Toolbar.Separator className={styles.Separator} />
     </Toolbar.Root>
