@@ -1,6 +1,7 @@
-import { Canvas, Point, Rect, Circle } from "fabric";
+import { Canvas, Point } from "fabric";
 import { ToolOptions } from "../types";
 import { layerStore } from "../stores/LayerStore";
+import shapeCreatorMapping from "../utility/shapeGenerator";
 
 export function handleShapeTool(
   canvas: Canvas,
@@ -8,33 +9,17 @@ export function handleShapeTool(
   options: ToolOptions["shape"]
 ) {
   const { color, type } = options;
-  let shape: Rect | Circle | null = null;
 
-  if (type === "rectangle") {
-    shape = new Rect({
-      left: pointer.x,
-      top: pointer.y,
-      width: 100,
-      height: 60,
-      fill: color,
-    });
-  } else if (type === "circle") {
-    shape = new Circle({
-      left: pointer.x,
-      top: pointer.y,
-      radius: 40,
-      fill: color,
-    });
-  }
+  const createShape = shapeCreatorMapping[type];
 
-  if (shape) {
-    canvas.add(shape);
-    canvas.renderAll();
+  const shape = createShape(pointer, color);
 
-    layerStore.addLayer({
-      type: "shape",
-      tool: "shape",
-      options,
-    });
-  }
+  canvas.add(shape);
+  canvas.renderAll();
+
+  layerStore.addLayer({
+    type: "shape",
+    tool: "shape",
+    options,
+  });
 }
