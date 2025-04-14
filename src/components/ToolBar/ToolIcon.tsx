@@ -28,7 +28,11 @@ const ToolIcon = ({ tool }: { tool: ToolAttributes }) => {
             </Popover.Trigger>
           </Tooltip.Trigger>
           <Tooltip.Portal>
-            <Tooltip.Content className={styles.ToolTipContent} sideOffset={5}>
+            <Tooltip.Content
+              className={styles.ToolTipContent}
+              sideOffset={5}
+              data-testid="radix-tooltip-content"
+            >
               {capitalizeWords(tool.id)}
             </Tooltip.Content>
           </Tooltip.Portal>

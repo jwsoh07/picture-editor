@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Layers } from "./Layers";
+import Layers from "./Layers";
 import { layerStore } from "../../stores/LayerStore";
 import { beforeEach, expect, it, test } from "vitest";
 
