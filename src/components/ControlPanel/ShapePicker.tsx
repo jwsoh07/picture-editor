@@ -3,11 +3,20 @@ import styled from "styled-components";
 import { observer } from "mobx-react-lite";
 import toolStore from "../../stores/ToolStore";
 import { Shape } from "../../types";
-import { SquareIcon, CircleIcon } from "@radix-ui/react-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  HexagonIcon,
+  CircleIcon,
+  TriangleIcon,
+  RectangularIcon,
+} from "@hugeicons/core-free-icons";
+import { VisuallyHidden } from "radix-ui";
 
 const shapeIcons: Record<Shape, React.ReactNode> = {
-  rectangle: <SquareIcon />,
-  circle: <CircleIcon />,
+  rectangle: <HugeiconsIcon icon={RectangularIcon} />,
+  triangle: <HugeiconsIcon icon={TriangleIcon} />,
+  hexagon: <HugeiconsIcon icon={HexagonIcon} />,
+  circle: <HugeiconsIcon icon={CircleIcon} />,
 };
 
 export const ShapePicker = observer(() => {
@@ -15,7 +24,7 @@ export const ShapePicker = observer(() => {
 
   return (
     <Wrapper>
-      <Label>Shape</Label>
+      <VisuallyHidden.Root>Shape Picker</VisuallyHidden.Root>
       <ShapeGrid>
         {Object.entries(shapeIcons).map(([type, icon]) => {
           const isSelected = selectedShape === type;
@@ -35,22 +44,15 @@ export const ShapePicker = observer(() => {
   );
 });
 
-// Styled Components
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
-`;
-
-const Label = styled.span`
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #333;
+  gap: 1px;
 `;
 
 const ShapeGrid = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 1px;
 `;
 
 const ShapeButton = styled.button<{ $selected: boolean }>`
