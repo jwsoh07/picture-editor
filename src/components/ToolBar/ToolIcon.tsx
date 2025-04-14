@@ -2,11 +2,13 @@ import { Toolbar, Tooltip, Popover } from "radix-ui";
 
 import toolStore from "../../stores/ToolStore";
 
+import { ToolAttributes } from "../../types";
+
 import styles from "./ToolIcon.module.css";
 
 import { capitalizeWords } from "../../utility/capitalizeWords";
 
-const ToolIcon = ({ tool }) => {
+const ToolIcon = ({ tool }: { tool: ToolAttributes }) => {
   // ToolIcon encompasses the tooltip as well as the popover
   // that holds the display settings for the tool passed in
   // as prop.
@@ -18,7 +20,6 @@ const ToolIcon = ({ tool }) => {
             <Popover.Trigger asChild>
               <Toolbar.Button
                 className={styles.IconButton}
-                value={tool.id}
                 aria-label={tool.label}
                 onClick={() => toolStore.setSelectedTool(tool.id)}
               >

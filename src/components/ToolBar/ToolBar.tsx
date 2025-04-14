@@ -13,9 +13,10 @@ import { Toolbar } from "radix-ui";
 import ShapePicker from "../ControlPanel/ShapePicker";
 import ColorPicker from "../ControlPanel/ColorPicker";
 import ToolIcon from "./ToolIcon";
+import { ToolAttributes } from "../../types";
 
 const ToolBar = observer(() => {
-  const tools = [
+  const tools: ToolAttributes[] = [
     {
       id: "shape",
       label: "Shape tool",
