@@ -35,7 +35,13 @@ const ToolBar = observer(() => {
       id: "fill",
       label: "Fill tool",
       icon: <HugeiconsIcon icon={PaintBucketIcon} size={20} />,
-      displaySettings: <></>,
+      displaySettings: (
+        <ColorPicker
+          label="Color"
+          color={toolStore.toolOptions.fill.color}
+          onChange={(newColor) => toolStore.setFillColor(newColor)}
+        />
+      ),
     },
   ] as const;
 
