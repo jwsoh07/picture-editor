@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
+import { act } from "react";
 import { beforeEach, describe, expect, it, vi, Mock } from "vitest";
 import DrawingArea from "./DrawingArea";
 import toolStore from "../../stores/ToolStore";
-import { act } from "react-dom/test-utils";
 import { Canvas } from "fabric";
 
 // 👇 Mock the 'fabric' library
