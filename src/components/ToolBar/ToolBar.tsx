@@ -1,18 +1,18 @@
 import { observer } from "mobx-react-lite";
 import toolStore from "../../stores/ToolStore";
 
-import { Toolbar, Tooltip, Popover } from "radix-ui";
-
-import styles from "./ToolBar.module.css";
-
-import { ShapePicker } from "../ControlPanel/ShapePicker";
-import { capitalizeWords } from "../../utility/capitalizeWords";
-import { ColorPicker } from "../ControlPanel/ColorPicker";
+import { HugeiconsIcon } from "@hugeicons/react";
 import {
   PaintBucketIcon,
   ShapeCollectionIcon,
 } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+
+import styles from "./ToolBar.module.css";
+import { Toolbar } from "radix-ui";
+
+import ShapePicker from "../ControlPanel/ShapePicker";
+import ColorPicker from "../ControlPanel/ColorPicker";
+import ToolIcon from "./ToolIcon";
 
 const ToolBar = observer(() => {
   const tools = [
@@ -48,47 +48,7 @@ const ToolBar = observer(() => {
   return (
     <Toolbar.Root className={styles.Root} aria-label="Picture editing tools">
       {tools.map((tool) => {
-        return (
-          <Tooltip.Provider delayDuration={500}>
-            <Tooltip.Root>
-              <Tooltip.Trigger asChild>
-                <Popover.Root>
-                  <Popover.Trigger asChild>
-                    <Toolbar.Button
-                      className={styles.IconButton}
-                      value={tool.id}
-                      aria-label={tool.label}
-                      onClick={() => toolStore.setSelectedTool(tool.id)}
-                    >
-                      {tool.icon}
-                    </Toolbar.Button>
-                  </Popover.Trigger>
-                  <Popover.Portal>
-                    <Popover.Content className={styles.Content} sideOffset={5}>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 10,
-                        }}
-                      >
-                        {tool.displaySettings}
-                      </div>
-
-                      <Popover.Arrow className={styles.Arrow} />
-                    </Popover.Content>
-                  </Popover.Portal>
-                </Popover.Root>
-              </Tooltip.Trigger>
-              <Tooltip.Portal>
-                <Tooltip.Content className={styles.ToolTipContent}>
-                  {capitalizeWords(tool.id)}
-                  <Tooltip.Arrow className={styles.Arrow} />
-                </Tooltip.Content>
-              </Tooltip.Portal>
-            </Tooltip.Root>
-          </Tooltip.Provider>
-        );
+        return <ToolIcon tool={tool} />;
       })}
       <Toolbar.Separator className={styles.Separator} />
     </Toolbar.Root>
