@@ -65,7 +65,7 @@ const ToolBar = observer(() => {
   return (
     <Toolbar.Root className={styles.Root} aria-label="Picture editing tools">
       {tools.map((tool) => {
-        return <ToolIcon tool={tool} />;
+        return <ToolIcon tool={tool} key={tool.id} />;
       })}
       <Toolbar.Separator className={styles.Separator} />
     </Toolbar.Root>
