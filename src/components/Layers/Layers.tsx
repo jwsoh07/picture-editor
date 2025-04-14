@@ -1,83 +1,42 @@
 import { observer } from "mobx-react-lite";
+import { ScrollArea, VisuallyHidden } from "radix-ui";
 import { BlendingModeIcon, MixIcon } from "@radix-ui/react-icons";
 
-import styled from "styled-components";
+import styles from "./Layers.module.css";
 import { layerStore } from "../../stores/LayerStore";
 
-const ListItemIconMap = {
+const LayerTypeIcons = {
   shape: <MixIcon />,
   fill: <BlendingModeIcon />,
 };
-
-const Wrapper = styled.div`
-  // provides spacing between the ToolBar and Layers
-  // components, as well as the right edge of screen.
-  --edge-offset: 20px;
-
-  position: absolute;
-  right: var(--edge-offset);
-  top: calc(var(--toolbar-height) + var(--edge-offset));
-  padding: 15px;
-  background: #fefefe;
-  max-height: 450px;
-  overflow: scroll;
-`;
-
-const Title = styled.h2`
-  font-size: 1.25rem;
-  margin-bottom: 15px;
-`;
-
-const LayersList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
-const LayerListItem = styled.li`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 12px;
-  border: 1px solid #f2f2f2;
-  border-radius: 2px;
-  flex-direction: column;
-  min-width: 220px;
-`;
-
-const ListItemHead = styled.span`
-  font-size: 0.8rem;
-  width: 100%;
-`;
-
-const ListItemBody = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 8px;
-  align-items: center;
-  font-size: 0.75rem;
-`;
 
 export const Layers = observer(() => {
   if (layerStore.layers.length === 0) return null;
 
   return (
-    <Wrapper data-testid="layers-panel">
-      <Title>Layers</Title>
-      <LayersList>
-        {layerStore.layers.map((layer, index) => (
-          <LayerListItem key={layer.id}>
-            <ListItemHead>{`Layer #${index + 1}`}</ListItemHead>
-            <ListItemBody>
-              {ListItemIconMap[layer.tool]}
-              <span>{layer.tool}</span>
-            </ListItemBody>
-            {/* Future features: visibility toggle, remove button, etc. */}
-          </LayerListItem>
-        ))}
-      </LayersList>
-    </Wrapper>
+    <ScrollArea.Root className={styles.Root} style={{ position: "absolute" }}>
+      <ScrollArea.Viewport className={styles.Viewport}>
+        <div style={{ padding: "15px 20px" }}>
+          <div className={styles.Text}>Layers</div>
+          {layerStore.layers.map((layer, index) => (
+            <div className={styles.Layer} key={layer.id}>
+              {LayerTypeIcons[layer.tool]}
+              Layer {index + 1}
+              <VisuallyHidden.Root>{layer.tool}</VisuallyHidden.Root>
+            </div>
+          ))}
+        </div>
+      </ScrollArea.Viewport>
+      <ScrollArea.Scrollbar className={styles.Scrollbar} orientation="vertical">
+        <ScrollArea.Thumb className={styles.Thumb} />
+      </ScrollArea.Scrollbar>
+      <ScrollArea.Scrollbar
+        className={styles.Scrollbar}
+        orientation="horizontal"
+      >
+        <ScrollArea.Thumb className={styles.Thumb} />
+      </ScrollArea.Scrollbar>
+      <ScrollArea.Corner className={styles.Corner} />
+    </ScrollArea.Root>
   );
 });
