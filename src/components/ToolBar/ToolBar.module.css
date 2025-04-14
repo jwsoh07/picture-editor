@@ -1,4 +1,5 @@
 .Root {
+  height: var(--toolbar-height);
   display: flex;
   padding: 5px 10px;
   width: 100%;
