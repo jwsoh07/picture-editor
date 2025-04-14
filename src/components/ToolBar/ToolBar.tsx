@@ -16,6 +16,22 @@ import ToolIcon from "./ToolIcon";
 import { ToolAttributes } from "../../types";
 
 const ToolBar = observer(() => {
+  /* This is where we would begin adding a new tool to the toolbar.
+   * The 4 necessary attributes for each tool are shown below in each
+   * tool object.
+   *
+   * id - This would differentiate what will happen when the user interacts
+   * with <DrawingArea />. e.g. id: shape would create and place shapes on
+   * the canvas.
+   *
+   * label - This is used for labelling the tool that is either visible to
+   * sighted users or screen readers.
+   *
+   * icon - Icon that shows up on ToolBar
+   *
+   * displaySettings - The input settings we would like the user to be able
+   * to configure before applying the tool on the DrawingArea.
+   */
   const tools: ToolAttributes[] = [
     {
       id: "shape",
