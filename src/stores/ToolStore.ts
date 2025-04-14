@@ -21,6 +21,10 @@ export class ToolStore {
     fill: {
       color: "#FFFFFF",
     },
+    pencil: {
+      color: "#000000",
+      width: 3,
+    },
   };
 
   constructor() {
