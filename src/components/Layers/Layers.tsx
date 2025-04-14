@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { ScrollArea } from "radix-ui";
+import { ScrollArea, VisuallyHidden } from "radix-ui";
 import { BlendingModeIcon, MixIcon } from "@radix-ui/react-icons";
 
 import styles from "./Layers.module.css";
@@ -22,6 +22,7 @@ export const Layers = observer(() => {
             <div className={styles.Layer} key={layer.id}>
               {LayerTypeIcons[layer.tool]}
               Layer {index + 1}
+              <VisuallyHidden.Root>{layer.tool}</VisuallyHidden.Root>
             </div>
           ))}
         </div>
