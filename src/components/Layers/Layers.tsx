@@ -10,7 +10,7 @@ const LayerTypeIcons = {
   fill: <BlendingModeIcon />,
 };
 
-export const Layers = observer(() => {
+const Layers = observer(() => {
   if (layerStore.layers.length === 0) return null;
 
   return (
@@ -40,3 +40,5 @@ export const Layers = observer(() => {
     </ScrollArea.Root>
   );
 });
+
+export default Layers;
