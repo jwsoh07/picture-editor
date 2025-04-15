@@ -1,13 +1,21 @@
 import { observer } from "mobx-react-lite";
 import { ScrollArea, VisuallyHidden } from "radix-ui";
-import { BlendingModeIcon, MixIcon } from "@radix-ui/react-icons";
 
 import styles from "./Layers.module.css";
 import { layerStore } from "../../stores/LayerStore";
+import {
+  BrushIcon,
+  PaintBucketIcon,
+  PencilEdit01Icon,
+  ShapeCollectionIcon,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 const LayerTypeIcons = {
-  shape: <MixIcon />,
-  fill: <BlendingModeIcon />,
+  shape: <HugeiconsIcon icon={ShapeCollectionIcon} size={16} />,
+  brush: <HugeiconsIcon icon={BrushIcon} size={16} />,
+  pencil: <HugeiconsIcon icon={PencilEdit01Icon} size={16} />,
+  fill: <HugeiconsIcon icon={PaintBucketIcon} size={16} />,
 };
 
 const Layers = observer(() => {

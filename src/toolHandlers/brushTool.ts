@@ -1,5 +1,6 @@
 import { Canvas, CircleBrush } from "fabric";
 import { ToolOptions } from "../types";
+import { layerStore } from "../stores/LayerStore";
 
 export function handleBrushTool(
   canvas: Canvas,
@@ -10,6 +11,9 @@ export function handleBrushTool(
   canvas.freeDrawingBrush.color = options.color;
   // canvas.freeDrawingBrush.width = options.width;
 
-  // Will be great if we can create a layer for
-  // free hand tools here.
+  layerStore.addLayer({
+    type: "freehand",
+    tool: "brush",
+    options,
+  });
 }
