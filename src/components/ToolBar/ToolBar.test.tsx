@@ -11,6 +11,8 @@ describe("ToolBar", () => {
 
     expect(screen.getByLabelText("Shape tool")).toBeInTheDocument();
     expect(screen.getByLabelText("Fill tool")).toBeInTheDocument();
+    expect(screen.getByLabelText("Pencil tool")).toBeInTheDocument();
+    expect(screen.getByLabelText("Brush tool")).toBeInTheDocument();
 
     // Tools to be implemented in the future
     // expect(screen.getByLabelText("Eraser tool")).toBeInTheDocument();
