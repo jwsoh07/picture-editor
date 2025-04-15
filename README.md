@@ -1,54 +1,71 @@
-# React + TypeScript + Vite
+# 🖌️ Picture Editor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser-based picture editor built with **React**, **Fabric.js**, and **MobX**, allowing users to draw on canvas, manipulate layers, and use tools like shapes, fill, pencil, brush, and eraser.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Draw shapes (rectangle, circle, triangle, arrow, star, hexagon)
+- Freeform tools (pencil and brush)
+- Eraser support
+- Fill color
+- Clear canvas
+- Manage layers (with optional layer clearing)
+- Responsive canvas size
+- Modern UI using Radix UI and styled-components
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Layer            | Technology                                                                      |
+| ---------------- | ------------------------------------------------------------------------------- |
+| UI Framework     | [React](https://reactjs.org/)                                                   |
+| State Management | [MobX](https://mobx.js.org/)                                                    |
+| Canvas Engine    | [Fabric.js](https://fabricjs.com/)                                              |
+| Styling          | [CSS Modules](https://github.com/css-modules/css-modules)                       |
+| Component UI     | [Radix UI](https://www.radix-ui.com/)                                           |
+| Icons            | [react-icons](https://react-icons.github.io/react-icons/)                       |
+| Testing          | [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) |
+| Build Tool       | [Vite](https://vitejs.dev/)                                                     |
+| Linting/Format   | ESLint, Prettier                                                                |
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/jwsoh07/picture-editor.git
+cd picture-editor
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+### 3. Run Locally
+
+```bash
+npm run dev
+```
+
+## 🧪 Testing
+
+- Written with **Vitest**
+- Located in the `src/components/**/__tests__` directory
+- Use `npm run test` or `npx vitest` to run tests
+
+## 🛠️ Adding New Tools
+
+📌 Notes
+The Fabric.js canvas is created in useCanvas.ts and managed through React and MobX.
+
+Tools are extendable. To add a new tool:
+
+- Create a handler in toolHandlers/
+- Update ToolBar
+- ToolStore
+- DrawingArea with new logic
+
+## 🧑‍💻 Author
+
+Made with ❤️ by jwsoh07
