@@ -1,5 +1,6 @@
 import { Canvas, PencilBrush } from "fabric";
 import { ToolOptions } from "../types";
+import { layerStore } from "../stores/LayerStore";
 
 export function handlePencilTool(
   canvas: Canvas,
@@ -17,6 +18,9 @@ export function handlePencilTool(
     canvas.freeDrawingBrush.width = 25;
   }
 
-  // Will be great if we can create a layer for
-  // free hand tools here.
+  layerStore.addLayer({
+    type: "freehand",
+    tool: "pencil",
+    options,
+  });
 }
