@@ -18,7 +18,12 @@ export type ShapeToolOptions = {
 
 export type PencilToolOptions = {
   color: string;
-  width: number;
+  size: string;
+};
+
+export type BrushToolOptions = {
+  color: string;
+  size: string;
 };
 
 export type FillToolOptions = {
@@ -29,4 +34,5 @@ export type ToolOptions = {
   shape: ShapeToolOptions;
   fill: FillToolOptions;
   pencil: PencilToolOptions;
+  brush: BrushToolOptions;
 };
