@@ -10,7 +10,7 @@ import {
 } from "@hugeicons/core-free-icons";
 
 import styles from "./ToolBar.module.css";
-import { Toolbar } from "radix-ui";
+import { RadioGroup, Toolbar } from "radix-ui";
 
 import ShapePicker from "../ControlPanel/ShapePicker";
 import ColorPicker from "../ControlPanel/ColorPicker";
@@ -48,7 +48,60 @@ const ToolBar = observer(() => {
           }}
         />
       ),
-      displaySettings: <></>,
+      displaySettings: (
+        <>
+          <ColorPicker
+            label="Color"
+            color={toolStore.toolOptions.pencil.color}
+            onChange={(newColor) => toolStore.setPencilColor(newColor)}
+          />
+          <Seperator />
+          <RadioGroup.Root
+            className={styles.RadioRoot}
+            defaultValue="small"
+            aria-label="Pencil size"
+            value={toolStore.toolOptions.pencil.size}
+            onValueChange={(newSize) => toolStore.setPencilSize(newSize)}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <RadioGroup.Item
+                value="small"
+                id="r1"
+                className={styles.RadioItem}
+              >
+                <RadioGroup.Indicator className={styles.RadioIndicator} />
+              </RadioGroup.Item>
+              <label htmlFor="r1" className={styles.RadioLabel}>
+                Small
+              </label>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <RadioGroup.Item
+                value="medium"
+                id="r2"
+                className={styles.RadioItem}
+              >
+                <RadioGroup.Indicator className={styles.RadioIndicator} />
+              </RadioGroup.Item>
+              <label htmlFor="r2" className={styles.RadioLabel}>
+                Medium
+              </label>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <RadioGroup.Item
+                value="large"
+                id="r3"
+                className={styles.RadioItem}
+              >
+                <RadioGroup.Indicator className={styles.RadioIndicator} />
+              </RadioGroup.Item>
+              <label htmlFor="r3" className={styles.RadioLabel}>
+                Large
+              </label>
+            </div>
+          </RadioGroup.Root>
+        </>
+      ),
     },
     {
       id: "brush",
@@ -62,7 +115,7 @@ const ToolBar = observer(() => {
           }}
         />
       ),
-      displaySettings: <></>,
+      displaySettings: <>Using default settings</>,
     },
     {
       id: "shape",
