@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Canvas, CircleBrush, PencilBrush, TPointerEvent } from "fabric";
+import { Canvas, TPointerEvent } from "fabric";
 
 import styled from "styled-components";
 import { observer } from "mobx-react-lite";
@@ -8,6 +8,8 @@ import toolStore from "../../stores/ToolStore";
 
 import { handleShapeTool } from "../../toolHandlers/shapeTool";
 import { handleFillTool } from "../../toolHandlers/fillTool";
+import { handlePencilTool } from "../../toolHandlers/pencilTool";
+import { handleBrushTool } from "../../toolHandlers/brushTool";
 
 const CanvasWrapper = styled.div`
   flex-grow: 1;
@@ -77,6 +79,12 @@ const DrawingArea = observer(() => {
         case "fill":
           handleFillTool(canvas, toolOptions.fill);
           break;
+        case "pencil":
+          handlePencilTool(canvas, toolOptions.pencil);
+          break;
+        case "brush":
+          handleBrushTool(canvas, toolOptions.brush);
+          break;
         default:
           break;
       }
@@ -89,23 +97,16 @@ const DrawingArea = observer(() => {
     };
   }, []);
 
-  // Set up drawing mode when user selects pencil tool
+  // Set up drawing mode when user selects any drawing tool
   useEffect(() => {
+    const { selectedTool } = toolStore;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    if (selectedTool === "pencil") {
+    if (selectedTool === "pencil" || selectedTool === "brush") {
       canvas.isDrawingMode = true;
-      canvas.freeDrawingBrush = new PencilBrush(canvas);
-      canvas.freeDrawingBrush.color = "#000000";
-      canvas.freeDrawingBrush.width = 2;
-    } else if (selectedTool === "brush") {
-      canvas.isDrawingMode = true;
-      canvas.freeDrawingBrush = new CircleBrush(canvas);
-      canvas.freeDrawingBrush.color = "#ff0000";
-      canvas.freeDrawingBrush.width = 10;
     } else {
-      console.log("no drawing anymore");
       canvas.isDrawingMode = false;
     }
   }, [selectedTool]);
