@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Layers from "./Layers";
 import { layerStore } from "../../stores/LayerStore";
+import { LayerType, Shape, Tool } from "../../types";
 import { beforeEach, expect, it, test } from "vitest";
 
 // Clear and reset store between tests
@@ -13,10 +14,10 @@ test("renders layers", () => {
   layerStore.layers = [
     {
       id: "1",
-      type: "shape",
-      tool: "shape",
+      type: LayerType.Shape,
+      tool: Tool.Shape,
       options: {
-        type: "rectangle",
+        type: Shape.Rectangle,
         color: "FFFFFF",
       },
       timestamp: Date.now(),
@@ -31,18 +32,18 @@ it("renders multiple layers", () => {
   layerStore.layers = [
     {
       id: "1",
-      type: "shape",
-      tool: "shape",
+      type: LayerType.Shape,
+      tool: Tool.Shape,
       options: {
-        type: "rectangle",
+        type: Shape.Rectangle,
         color: "FFFFFF",
       },
       timestamp: Date.now(),
     },
     {
       id: "2",
-      type: "background",
-      tool: "fill",
+      type: LayerType.Background,
+      tool: Tool.Fill,
       options: {
         color: "F3G3F3",
       },

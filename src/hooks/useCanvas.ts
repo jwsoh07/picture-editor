@@ -6,6 +6,7 @@ import { handleFillTool } from "../toolHandlers/fillTool";
 import { handlePencilTool } from "../toolHandlers/pencilTool";
 import { handleBrushTool } from "../toolHandlers/brushTool";
 import { Canvas, TPointerEvent } from "fabric";
+import { Tool } from "../types";
 
 export const useCanvas = (
   canvasElRef: React.RefObject<HTMLCanvasElement | null>
@@ -65,16 +66,16 @@ export const useCanvas = (
       const { selectedTool, toolOptions } = toolStore;
 
       switch (selectedTool) {
-        case "shape":
+        case Tool.Shape:
           handleShapeTool(canvas, pointer, toolOptions.shape);
           break;
-        case "fill":
+        case Tool.Fill:
           handleFillTool(canvas, toolOptions.fill);
           break;
-        case "pencil":
+        case Tool.Pencil:
           handlePencilTool(canvas, toolOptions.pencil);
           break;
-        case "brush":
+        case Tool.Brush:
           handleBrushTool(canvas, toolOptions.brush);
           break;
         default:
@@ -96,7 +97,7 @@ export const useCanvas = (
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    if (selectedTool === "pencil" || selectedTool === "brush") {
+    if (selectedTool === Tool.Pencil || selectedTool === Tool.Brush) {
       canvas.isDrawingMode = true;
     } else {
       canvas.isDrawingMode = false;

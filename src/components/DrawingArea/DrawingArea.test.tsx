@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi, Mock } from "vitest";
 import DrawingArea from "./DrawingArea";
 import toolStore from "../../stores/ToolStore";
 import { Canvas } from "fabric";
+import { Shape, Tool } from "../../types";
 
 // 👇 Mock the 'fabric' library
 vi.mock("fabric", async () => {
@@ -26,9 +27,9 @@ vi.mock("fabric", async () => {
 
 describe("DrawingArea", () => {
   beforeEach(() => {
-    toolStore.setSelectedTool("shape");
+    toolStore.setSelectedTool(Tool.Shape);
     toolStore.setShapeColor("#00ff00");
-    toolStore.setShapeType("rectangle");
+    toolStore.setShapeType(Shape.Rectangle);
   });
 
   it("should render the canvas element", () => {
@@ -50,7 +51,7 @@ describe("DrawingArea", () => {
   it("should respond to tool changes in the toolStore", () => {
     render(<DrawingArea />);
     act(() => {
-      toolStore.setSelectedTool("fill");
+      toolStore.setSelectedTool(Tool.Fill);
       toolStore.setFillColor("#123456");
     });
 

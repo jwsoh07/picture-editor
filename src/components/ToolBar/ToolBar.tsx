@@ -15,7 +15,7 @@ import { RadioGroup, Toolbar } from "radix-ui";
 import ShapePicker from "../ControlPanel/ShapePicker";
 import ColorPicker from "../ControlPanel/ColorPicker";
 import ToolIcon from "./ToolIcon";
-import { ToolAttributes } from "../../types";
+import { Tool, ToolAttributes } from "../../types";
 import Seperator from "../Seperator";
 
 const ToolBar = observer(() => {
@@ -37,14 +37,14 @@ const ToolBar = observer(() => {
    */
   const tools: ToolAttributes[] = [
     {
-      id: "pencil",
+      id: Tool.Pencil,
       label: "Pencil tool",
       icon: (
         <HugeiconsIcon
           icon={PencilEdit01Icon}
           size={20}
           onClick={() => {
-            toolStore.setSelectedTool("pencil");
+            toolStore.setSelectedTool(Tool.Pencil);
           }}
         />
       ),
@@ -104,21 +104,21 @@ const ToolBar = observer(() => {
       ),
     },
     {
-      id: "brush",
+      id: Tool.Brush,
       label: "Brush tool",
       icon: (
         <HugeiconsIcon
           icon={BrushIcon}
           size={20}
           onClick={() => {
-            toolStore.setSelectedTool("brush");
+            toolStore.setSelectedTool(Tool.Brush);
           }}
         />
       ),
       displaySettings: <>Using default settings</>,
     },
     {
-      id: "shape",
+      id: Tool.Shape,
       label: "Shape tool",
       icon: <HugeiconsIcon icon={ShapeCollectionIcon} size={20} />,
       displaySettings: (
@@ -134,7 +134,7 @@ const ToolBar = observer(() => {
       ),
     },
     {
-      id: "fill",
+      id: Tool.Fill,
       label: "Fill tool",
       icon: <HugeiconsIcon icon={PaintBucketIcon} size={20} />,
       displaySettings: (

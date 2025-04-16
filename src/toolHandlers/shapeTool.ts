@@ -1,12 +1,12 @@
 import { Canvas, Point } from "fabric";
-import { ToolOptions } from "../types";
+import { LayerType, Tool, ToolOptions } from "../types";
 import { layerStore } from "../stores/LayerStore";
 import shapeCreatorMapping from "../utility/shapeGenerator";
 
 export function handleShapeTool(
   canvas: Canvas,
   pointer: Point,
-  options: ToolOptions["shape"]
+  options: ToolOptions[Tool.Shape]
 ) {
   const { color, type } = options;
 
@@ -18,8 +18,8 @@ export function handleShapeTool(
   canvas.renderAll();
 
   layerStore.addLayer({
-    type: "shape",
-    tool: "shape",
+    type: LayerType.Shape,
+    tool: Tool.Shape,
     options,
   });
 }

@@ -8,19 +8,14 @@
  */
 
 import { makeAutoObservable } from "mobx";
-import {
-  ToolID,
-  ToolOptions,
-  ShapeToolOptions,
-  PencilToolOptions,
-} from "../types";
+import { Tool, ToolOptions, Shape } from "../types";
 
 export class ToolStore {
-  selectedTool: ToolID | null = null;
+  selectedTool: Tool | null = null;
 
   toolOptions: ToolOptions = {
     shape: {
-      type: "rectangle",
+      type: Shape.Rectangle,
       color: "#ffffff",
     },
     fill: {
@@ -40,19 +35,19 @@ export class ToolStore {
     makeAutoObservable(this);
   }
 
-  setSelectedTool(tool: ToolID | null) {
+  setSelectedTool(tool: Tool) {
     this.selectedTool = tool;
   }
 
-  setShapeType(type: ShapeToolOptions["type"]) {
+  setShapeType(type: Shape) {
     this.toolOptions.shape.type = type;
   }
 
-  setPencilSize(size: PencilToolOptions["size"]) {
+  setPencilSize(size: string) {
     this.toolOptions.pencil.size = size;
   }
 
-  setPencilColor(color: PencilToolOptions["color"]) {
+  setPencilColor(color: string) {
     this.toolOptions.pencil.color = color;
   }
 
