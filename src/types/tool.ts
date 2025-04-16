@@ -1,38 +1,44 @@
 import { ReactElement } from "react";
+import { Shape } from ".";
 
-export type ToolID = "shape" | "fill" | "pencil" | "brush";
-
-export type Shape = "rectangle" | "circle" | "hexagon" | "triangle";
+export enum Tool {
+  Shape = "shape",
+  Fill = "fill",
+  Pencil = "pencil",
+  Brush = "brush",
+}
 
 export type ToolAttributes = {
-  id: ToolID;
+  id: Tool;
   label: string;
   icon: ReactElement;
   displaySettings: ReactElement;
 };
 
-export type ShapeToolOptions = {
+export interface ShapeToolOptions extends DrawingToolOptions {
   type: Shape;
-  color: string;
-};
+}
 
-export type PencilToolOptions = {
-  color: string;
+export interface PencilToolOptions extends DrawingToolOptions {
   size: string;
-};
+}
 
-export type BrushToolOptions = {
-  color: string;
+export interface BrushToolOptions extends DrawingToolOptions {
   size: string;
-};
+}
 
-export type FillToolOptions = {
+// Delibrately surpressed error message as I want to give
+// an interface name to the options of the fill tool.
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface FillToolOptions extends DrawingToolOptions {}
+
+interface DrawingToolOptions {
   color: string;
-};
+}
 
-export type ToolOptions = {
+export interface ToolOptions {
   shape: ShapeToolOptions;
   fill: FillToolOptions;
   pencil: PencilToolOptions;
   brush: BrushToolOptions;
-};
+}

@@ -3,14 +3,19 @@ import {
   FillToolOptions,
   PencilToolOptions,
   BrushToolOptions,
+  Tool,
 } from "./tool";
 
-export type LayerType = "shape" | "background" | "freehand";
+export enum LayerType {
+  Shape = "shape",
+  Background = "background",
+  Freehand = "freehand",
+}
 
 export interface Layer {
   id: string;
   type: LayerType;
-  tool: "fill" | "shape" | "pencil" | "brush";
+  tool: Tool;
   options:
     | ShapeToolOptions
     | FillToolOptions

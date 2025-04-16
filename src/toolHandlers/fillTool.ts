@@ -1,14 +1,17 @@
 import { Canvas } from "fabric";
-import { ToolOptions } from "../types";
+import { LayerType, Tool, ToolOptions } from "../types";
 import { layerStore } from "../stores/LayerStore";
 
-export function handleFillTool(canvas: Canvas, options: ToolOptions["fill"]) {
+export function handleFillTool(
+  canvas: Canvas,
+  options: ToolOptions[Tool.Fill]
+) {
   canvas.backgroundColor = options.color;
   canvas.renderAll();
 
   layerStore.addLayer({
-    type: "background",
-    tool: "fill",
+    type: LayerType.Background,
+    tool: Tool.Fill,
     options,
   });
 }

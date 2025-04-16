@@ -1,11 +1,11 @@
 import { Canvas, PencilBrush } from "fabric";
-import { ToolOptions } from "../types";
+import { LayerType, Tool, ToolOptions } from "../types";
 import { layerStore } from "../stores/LayerStore";
 
 export function handlePencilTool(
   canvas: Canvas,
 
-  options: ToolOptions["pencil"]
+  options: ToolOptions[Tool.Pencil]
 ) {
   canvas.freeDrawingBrush = new PencilBrush(canvas);
   canvas.freeDrawingBrush.color = options.color;
@@ -19,8 +19,8 @@ export function handlePencilTool(
   }
 
   layerStore.addLayer({
-    type: "freehand",
-    tool: "pencil",
+    type: LayerType.Freehand,
+    tool: Tool.Pencil,
     options,
   });
 }
